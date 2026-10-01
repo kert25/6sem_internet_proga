@@ -12,13 +12,20 @@
 //           --eval "код"       выполнить JS в странице, напечатать результат
 //           --eval-file f.js   то же из файла
 //           --nowait-eval "код" отправить JS не дожидаясь ответа (для alert/confirm/prompt)
+//           --click "селектор" настоящий щелчок мыши по элементу (Input.dispatchMouseEvent);
+//                              доверенное событие с user activation — открывает popup,
+//                              не блокируемый popup-блокироватором (в отличие от .click())
 //           --shot out.png     снимок viewport страницы (Page.captureScreenshot)
 //           --os-shot out.png  снимок реального окна Edge через shot.ps1 (для alert/confirm/
 //                              prompt: снимок делается при живом CDP-соединении, т.к. Edge
 //                              закрывает диалог при отключении последнего DevTools-клиента);
 //                              дополнительно: --os-shot-process msedge | --os-shot-title "подстрока"
 //           --wait N           пауза N мс
-//           --on-dialog keep|accept|dismiss  что делать с открытым диалогом
+//           --dialog-action accept|dismiss[:текст]  дождаться открытого JS-диалога
+//                              и обработать его прямо в очереди действий
+//                              (текст после ':' — для prompt); можно несколько раз
+//           --dialog-wait      ждать открытия JS-диалога (без обработки)
+//           --on-dialog keep|accept|dismiss  что делать с открытым диалогом в конце run
 //                              (keep: только сообщить и оставить открытым — для снимка ОС-окна)
 //           --on-dialog-text T текст для prompt при accept
 //   node cdp.js dialog --action accept|dismiss [--text T] [--port 9222]
@@ -158,8 +165,13 @@ async function cmdRun(opts) {
     const u = encodeURI(opts.url);
     const pages = (await listTargets(port)).filter(t => t.type === "page");
     target = pages.find(t => t.url.startsWith(u)) ||
-             pages.find(t => t.url === "about:blank") ||
-             await httpPut(`http://127.0.0.1:${port}/json/new?${u}`);
+             pages.find(t => t.url === "about:blank");
+    if (!target) {
+      // вкладку создаём ПУСТОЙ и грузим страницу одним Page.navigate ниже:
+      // создание вкладки сразу с URL порождает двойную загрузку страницы,
+      // из-за которой теряются диалоги (alert/prompt/confirm), открытые при загрузке
+      target = await httpPut(`http://127.0.0.1:${port}/json/new?about:blank`);
+    }
   } else {
     target = await pickTarget(port, opts);
   }
@@ -170,6 +182,10 @@ async function cmdRun(opts) {
   let dialogState = null;   // {type, message, defaultPrompt}
   let dialogWaiters = [];
   cdp.on((method, params) => {
+    if (method === "Page.javascriptDialogClosed") {
+      dialogState = null;   // диалог закрыт — следующий --dialog-action будет ждать нового
+      return;
+    }
     if (method === "Page.javascriptDialogOpening") {
       dialogState = params;
       print(`DIALOG OPEN: type=${params.type} message=${JSON.stringify(params.message)}` +
@@ -192,11 +208,13 @@ async function cmdRun(opts) {
     else if (a === "--eval") { push("eval", raw[++i]); }
     else if (a === "--eval-file") { push("evalfile", raw[++i]); }
     else if (a === "--nowait-eval") { push("nowait-eval", raw[++i]); }
+    else if (a === "--click") { push("click", raw[++i]); }
     else if (a === "--shot") { push("shot", raw[++i]); }
     else if (a === "--os-shot") { push("osshot", raw[++i]); }
     else if (a === "--os-shot-process") { i++; }   // значение обрабатывает parseArgs
     else if (a === "--os-shot-title") { i++; }
     else if (a === "--wait") { push("wait", Number(raw[++i])); }
+    else if (a === "--dialog-action") { push("dialogaction", raw[++i]); }
     else if (a === "--dialog-wait") { push("dialog-wait", null); }
   }
   const onErrorDialog = opts["on-dialog"] || "keep";   // keep | accept | dismiss
@@ -236,6 +254,27 @@ async function cmdRun(opts) {
         break;
       }
       case "eval": await doEval(act.value, true); break;
+      case "click": {
+        // координаты центра элемента в viewport
+        const r = await cdp.send("Runtime.evaluate", {
+          expression:
+            `(function(){var e=document.querySelector(${JSON.stringify(act.value)});` +
+            `if(!e)return null;var b=e.getBoundingClientRect();` +
+            `return JSON.stringify({x:b.left+b.width/2,y:b.top+b.height/2});})()`,
+          returnByValue: true,
+        });
+        if (!r.result || r.result.value == null) {
+          print("CLICK элемент не найден: " + act.value);
+          break;
+        }
+        const { x, y } = JSON.parse(r.result.value);
+        // доверенный щелчок мыши (user activation) — два события: нажатие и отпускание
+        const base = { x, y, button: "left", clickCount: 1 };
+        await cdp.send("Input.dispatchMouseEvent", { ...base, type: "mousePressed" });
+        await cdp.send("Input.dispatchMouseEvent", { ...base, type: "mouseReleased" });
+        print("CLICK " + act.value + " @ " + x + "," + y);
+        break;
+      }
       case "evalfile": await doEval(fs.readFileSync(act.value, "utf8"), true); break;
       case "nowait-eval": await doEval(act.value, false); break;
       case "shot": {
@@ -263,6 +302,25 @@ async function cmdRun(opts) {
         break;
       }
       case "wait": await sleep(act.value); print("WAIT " + act.value); break;
+      case "dialogaction": {
+        // дождаться открытия диалога (если ещё не открыт)
+        if (!dialogState) {
+          await Promise.race([
+            new Promise(res => dialogWaiters.push(res)),
+            sleep(opts.timeout || 15000),
+          ]);
+        }
+        if (!dialogState) { print("DIALOG не открылся за таймаут"); break; }
+        // значение вида accept[:текст] / dismiss[:текст]
+        const parts = String(act.value).split(":");
+        const action = parts.shift();
+        const text = parts.join(":");
+        const params = { accept: action === "accept" };
+        if (text) params.promptText = text;
+        await cdp.send("Page.handleJavaScriptDialog", params);
+        print("DIALOG HANDLED " + action + (text ? " text=" + JSON.stringify(text) : ""));
+        break;
+      }
       case "dialog-wait": {
         if (!dialogState) {
           await Promise.race([

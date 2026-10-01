@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Задание 9. Объект document</title>
+</head>
+<body>
+    <script language="JavaScript" type="text/JavaScript">
+        // Цвет фона документа — #E7E6D8
+        document.bgColor = "#E7E6D8";
+
+        // Цвет шрифта — красный
+        document.fgColor = "red";
+
+        // Вывод текста в окно браузера
+        document.write("Спасибо, что пришли к нам на курсы!<br>");
+
+        // Внизу — дата последней модификации документа
+        // (слияние методов write() и lastModified объекта document)
+        document.write("Дата последней модификации: " + document.lastModified);
+    </script>
+</body>
+</html>

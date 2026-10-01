@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Задание 3. prompt, confirm, alert</title>
+</head>
+<body>
+    <script language="JavaScript">
+        // Диалоговое окно с полем ввода имени и значением по умолчанию
+        var name = prompt("Введите сюда своё имя", "Введите имя");
+
+        // Вывод введенного значения имени в окно браузера
+        document.write("Ваше имя " + name + "<br>");
+
+        // Диалоговое окно "Начать заново?"
+        if (confirm("Начать заново?")) {          // положительный ответ
+            alert("Не надоело?");
+        }
+        else {                                    // отказ
+            alert("Ну и правильно!");
+        }
+    </script>
+</body>
+</html>

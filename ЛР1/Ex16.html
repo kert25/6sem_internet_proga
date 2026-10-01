@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Задание 15. Смена цвета заголовка</title>
+    <script language="JavaScript">
+        // При наведении курсора заголовок становится красным
+        function colorchange() {
+            head.style.color = "red";
+        }
+        // Дописано: при отводе курсора цвет возвращается
+        function colorback() {
+            head.style.color = "black";
+        }
+    </script>
+</head>
+<body>
+    <h1 id="head" onmouseover="colorchange()" onmouseout="colorback()">
+        Добро пожаловать на нашу страницу!
+    </h1>
+    <p>Здесь много интересной информации. Здесь много интересной информации.
+       Здесь много интересной информации. Здесь много интересной информации.</p>
+</body>
+</html>

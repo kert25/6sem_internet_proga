@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Задание 18. Плавная анимация сверху вниз</title>
+    <script language="JavaScript">
+        function moveTxt() {
+            var s = anim.style;
+            // Текущая вертикальная позиция: атрибут pixelTop (по методичке) —
+            // в современных браузерах не определен, тогда parseInt() от style.top
+            var top = (s.pixelTop !== undefined) ? s.pixelTop : parseInt(s.top);
+
+            if (top < 500) {
+                top += 2;   // плавное движение: малый скачок 2 пикселя
+                // Задание направления сверху вниз — при помощи атрибута pixelTop
+                if (s.pixelTop !== undefined) s.pixelTop = top;
+                else s.top = top + "px";
+                setTimeout("moveTxt()", 50);   // короткий интервал 50 мс
+            }
+        }
+    </script>
+</head>
+<body onLoad="moveTxt()">
+    <!-- px в значениях обязателен (в современных браузерах значения без единиц игнорируются) -->
+    <div id="anim" style="position:absolute; left:10px; top:10px">
+        Текст, шагом марш!
+    </div>
+</body>
+</html>

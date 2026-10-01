@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Задание 10. window.open</title>
+    <script language="JavaScript" type="text/JavaScript">
+        // Функция открытия нового окна при нажатии на ссылку
+        function openHelp() {
+            // размеры окна 500x500, возможность изменения размеров окна
+            window.open("Ex10_win.html", "", "width=500, height=500, resizable=yes, scrollbars=yes");
+            return false;   // отменяем переход по самой ссылке
+        }
+    </script>
+</head>
+<body>
+    <h1>Создание нового окна</h1>
+    <hr>
+    <!-- Открытие нового окна происходит при нажатии на ссылку -->
+    <a href="Ex10_win.html" onClick="return openHelp()">Щелкните на ссылке для получения справочной информации</a>
+</body>
+</html>

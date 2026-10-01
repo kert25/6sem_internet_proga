@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Задание 19. Движение по диагонали к середине экрана</title>
+    <script language="JavaScript">
+        function moveTxt() {
+            var s = anim.style;
+            // Текущие координаты: pixelTop/pixelLeft (по методичке) —
+            // в современных браузерах не определены, тогда parseInt() от style
+            var top = (s.pixelTop !== undefined) ? s.pixelTop : parseInt(s.top);
+            var left = (s.pixelLeft !== undefined) ? s.pixelLeft : parseInt(s.left);
+
+            if (top < 430) {
+                top += 2;    // движение вниз
+                left -= 2;  // и влево — по диагонали к середине экрана
+                if (s.pixelTop !== undefined) s.pixelTop = top;
+                else s.top = top + "px";
+                if (s.pixelLeft !== undefined) s.pixelLeft = left;
+                else s.left = left + "px";
+                setTimeout("moveTxt()", 50);
+            }
+        }
+    </script>
+</head>
+<body onLoad="moveTxt()">
+    <!-- Старт из верхнего правого угла экрана (приблизительно) -->
+    <div id="anim" style="position:absolute; left:900px; top:10px">
+        Текст, шагом марш!
+    </div>
+</body>
+</html>

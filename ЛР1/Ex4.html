@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Задание 4. Сравнение чисел</title>
+</head>
+<body>
+    <h1>Сравнение двух чисел</h1>
+    <script language="JavaScript" type="text/JavaScript">
+        var x, y;
+        // метод parseInt() переводит строку в целое число
+        x = parseInt(prompt("Введите значение x", ""));
+        y = parseInt(prompt("Введите значение y", ""));
+
+        if (x < y) {
+            alert("Максимальное число - y");      // y больше
+        }
+        else if (x > y) {
+            alert("Максимальное число - x");      // x больше
+        }
+        else {
+            alert("Введенные числа равны!");      // числа равны (дописано)
+        }
+    </script>
+</body>
+</html>

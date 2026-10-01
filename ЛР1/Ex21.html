@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Задание 20. Три слоя и проплывающая картинка</title>
+    <script language="JavaScript">
+        // Картинка проплывает слева направо между двумя статичными квадратами
+        function movePic() {
+            var s = pic.style;
+            // Текущая позиция: pixelLeft (по методичке) —
+            // в современных браузерах не определен, тогда parseInt() от style.left
+            var left = (s.pixelLeft !== undefined) ? s.pixelLeft : parseInt(s.left);
+
+            if (left < 1000) {
+                left += 10;   // скачок 10 пикселей вправо
+                if (s.pixelLeft !== undefined) s.pixelLeft = left;
+                else s.left = left + "px";
+                setTimeout("movePic()", 50);   // интервал 50 мс
+            }
+        }
+    </script>
+</head>
+<body onLoad="movePic()">
+    <!-- Верхний слой: статичный квадрат (синий) с текстом -->
+    <div style="position:absolute; top:40; left:40; width:200; height:200;
+                background:#3399cc; color:white; text-align:center;">
+        <b>Верхний слой</b>
+    </div>
+    <!-- Средний слой: картинка, проплывающая слева направо -->
+    <div id="pic" style="position:absolute; top:270px; left:10px">
+        <img src="img/ship.png" alt="Картинка">
+    </div>
+    <!-- Нижний слой: статичный квадрат (оранжевый) с текстом -->
+    <div style="position:absolute; top:480; left:40; width:200; height:200;
+                background:#cc6633; color:white; text-align:center;">
+        <b>Нижний слой</b>
+    </div>
+</body>
+</html>

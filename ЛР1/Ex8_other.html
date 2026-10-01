@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Страница для других браузеров</title>
+</head>
+<body>
+    <h1>Вы зашли через другой браузер</h1>
+    <p id="appname"></p>
+    <p>Вы были автоматически перенаправлены на эту страницу.</p>
+    <script language="JavaScript">
+        // Показ имени браузера, определенного через navigator.appName
+        document.getElementById("appname").innerHTML =
+            "navigator.appName = \"" + navigator.appName + "\"";
+    </script>
+</body>
+</html>

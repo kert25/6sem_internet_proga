@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Задание 16. text-decoration</title>
+    <script language="JavaScript">
+        // При наведении курсора — подчеркивание заголовка
+        function addunderline() {
+            head.style.textDecoration = "underline";
+        }
+        // При отведении курсора — обычный вид
+        function removeunderline() {
+            head.style.textDecoration = "none";
+        }
+        // Дописано: одинарный щелчок — полоса над заголовком (overline)
+        function overline() {
+            head.style.textDecoration = "overline";
+        }
+        // Дописано: двойной щелчок — зачеркивание (line-through)
+        function strike() {
+            head.style.textDecoration = "line-through";
+        }
+    </script>
+</head>
+<body>
+    <h1 id="head" onMouseover="addunderline()" onMouseout="removeunderline()"
+        onclick="overline()" ondblclick="strike()">
+        Добро пожаловать на нашу страницу!
+    </h1>
+    <p>Здесь много интересной информации. Здесь много интересной информации.
+       Здесь много интересной информации. Здесь много интересной информации.</p>
+</body>
+</html>

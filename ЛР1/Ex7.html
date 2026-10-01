@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Задание 7. Массивы и slice()</title>
+    <script language="JavaScript">
+        // Функция описана в разделе <head>
+        function showSubjects() {
+            // Массив названий школьных предметов
+            var subjects = new Array("алгебра", "геометрия", "физика", "информатика",
+                                     "литература", "история", "обществознание");
+
+            // Выделение двух массивов методом slice():
+            var exact = subjects.slice(0, 4);   // предметы из раздела точных наук
+            var human = subjects.slice(4);      // предметы из раздела гуманитарных наук
+
+            // Вывод новых массивов в окно браузера методом write() объекта document
+            document.write("Точные науки: " + exact + "<br>");
+            document.write("Гуманитарные науки: " + human + "<br>");
+        }
+    </script>
+</head>
+<body>
+    <h1>Школьные предметы</h1>
+    <!-- Вызов функции в разделе <body> -->
+    <script language="JavaScript">
+        showSubjects();
+    </script>
+</body>
+</html>

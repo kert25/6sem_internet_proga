@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Задание 8. Определение браузера и переадресация</title>
+</head>
+<body>
+    <script language="JavaScript">
+        // Свойство appName объекта navigator содержит имя браузера
+        if (navigator.appName == "Microsoft Internet Explorer") {
+            // пользователь зашел через Microsoft Internet Explorer —
+            // автоматическая переадресация на одну страницу
+            location.href = "Ex8_ie.html";
+        }
+        else {
+            // любой другой браузер — переадресация на другую страницу
+            location.href = "Ex8_other.html";
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Задание 14. Проверка формы (Ex15.html)</title>
+    <script language="JavaScript">
+        // Функция проверки правильности заполнения формы
+        function check() {
+            var f = document.reg;   // форма по имени
+
+            // заполнено ли поле имени
+            if (f.user_name.value == "") {
+                alert("Заполните поле имени!");
+                f.user_name.focus();          // курсор в ошибочное поле
+                return false;
+            }
+            // введен ли пароль и содержит ли он больше 4-х символов
+            if (f.pass.value.length <= 4) {
+                alert("Пароль должен содержать больше 4-х символов!");
+                f.pass.focus();
+                return false;
+            }
+            // совпадают ли значения, введенные в оба поля для паролей
+            if (f.pass.value != f.pass2.value) {
+                alert("Пароли не совпадают!");
+                f.pass2.focus();
+                return false;
+            }
+            // заполнено ли поле электронного адреса и содержит ли оно символ @
+            if (f.email.value == "" || f.email.value.indexOf("@") == -1) {
+                alert("Введите корректный электронный адрес (со символом @)!");
+                f.email.focus();
+                return false;
+            }
+            // заполнено ли поле сообщения и содержит ли оно больше 10 символов
+            if (f.msg.value.length <= 10) {
+                alert("Сообщение должно содержать больше 10 символов!");
+                f.msg.focus();
+                return false;
+            }
+            // все условия соблюдены
+            alert("Форма заполнена корректно. Данные отправлены!");
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <h1>Форма заполнения данных</h1>
+    <form name="reg" onSubmit="return check()">
+        <p>Ваше имя: * <input type="text" name="user_name" size="30"></p>
+        <p>Пароль: * <input type="password" name="pass" size="20"></p>
+        <p>Подтверждение пароля: * <input type="password" name="pass2" size="20"></p>
+        <p>Электронный адрес: * <input type="text" name="email" size="30"></p>
+        <p>Тема сообщения: <input type="text" name="theme" size="40"></p>
+        <p>Сообщение: * <textarea name="msg" rows="5" cols="40"></textarea></p>
+        <p>* - необходимые для заполнения поля</p>
+        <input type="submit" value="Отправить">
+        <input type="reset" value="Очистить">
+    </form>
+</body>
+</html>

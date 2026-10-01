@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Задание 13. Увеличение картинки</title>
+    <script language="JavaScript">
+        // При наведении курсора мыши картинка увеличивается
+        function big(pic) {
+            pic.width = 300;
+        }
+        // При отведении курсора мыши уменьшается до исходного размера
+        function small(pic) {
+            pic.width = 150;
+        }
+    </script>
+</head>
+<body>
+    <h1>Наведите курсор на картинку</h1>
+    <!-- Исходный размер — 150 пикселей; события MouseOver и MouseOut -->
+    <img src="img/picture.png" width="150" alt="Картинка"
+         onMouseOver="big(this)" onMouseOut="small(this)">
+</body>
+</html>
