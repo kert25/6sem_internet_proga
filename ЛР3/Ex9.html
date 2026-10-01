@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задание 9 — Календарь</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 760px; margin: 40px auto; padding: 0 20px; color: #1d2939; }
+        .controls { display: flex; flex-wrap: wrap; gap: 12px; align-items: end; margin: 20px 0; }
+        label { display: grid; gap: 5px; font-weight: bold; }
+        input, button { font: inherit; padding: 8px; }
+        button { cursor: pointer; background: #175cd3; color: white; border: 0; border-radius: 4px; }
+        #calendar-error { color: #b42318; font-weight: bold; min-height: 1.4em; }
+        table { border-collapse: collapse; width: 100%; margin-top: 18px; text-align: center; }
+        caption { font-size: 1.2rem; font-weight: bold; padding: 10px; }
+        th, td { border: 1px solid #98a2b3; height: 42px; }
+        th { background: #d1e9ff; }
+        th:nth-child(6), th:nth-child(7) { color: #b42318; }
+    </style>
+</head>
+<body>
+    <h1>Задание 9. Календарь на HTML</h1>
+    <p>Введите год и номер месяца, чтобы построить календарь с помощью циклов JavaScript.</p>
+
+    <div class="controls">
+        <label>Год <input id="year" type="number" min="1" step="1" value="2028"></label>
+        <label>Месяц (1–12) <input id="month" type="number" min="1" max="12" step="1" value="2"></label>
+        <button type="button" onclick="renderCalendar()">Построить календарь</button>
+    </div>
+    <p id="calendar-error" role="alert"></p>
+    <div id="calendar-result"></div>
+
+    <script>
+        const monthNames = ['январь', 'февраль', 'март', 'апрель', 'май', 'июнь', 'июль', 'август', 'сентябрь', 'октябрь', 'ноябрь', 'декабрь'];
+        const weekDays = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
+
+        function renderCalendar() {
+            const yearField = document.getElementById('year');
+            const monthField = document.getElementById('month');
+            const year = Number(yearField.value);
+            const month = Number(monthField.value);
+            const error = document.getElementById('calendar-error');
+            const result = document.getElementById('calendar-result');
+
+            result.replaceChildren();
+            error.textContent = '';
+            if (yearField.value.trim() === '' || monthField.value.trim() === '' || !Number.isInteger(year) || year < 1 || year > 275759 || !Number.isInteger(month) || month < 1 || month > 12) {
+                error.textContent = 'Введите целый год от 1 до 275759 и номер месяца от 1 до 12.';
+                return;
+            }
+
+            // setFullYear предотвращает автоматическое преобразование годов 1–99 в 1901–1999.
+            const lastDay = new Date(0, month, 0);
+            lastDay.setFullYear(year);
+            const firstDay = new Date(0, month - 1, 1);
+            firstDay.setFullYear(year);
+            const daysInMonth = lastDay.getDate();
+            const sundayBasedDay = firstDay.getDay();
+            const firstDayOffset = (sundayBasedDay + 6) % 7;
+            const table = document.createElement('table');
+            const caption = table.createCaption();
+            caption.textContent = `${monthNames[month - 1]} ${year}`;
+            const header = table.insertRow();
+
+            for (const dayName of weekDays) {
+                const cell = document.createElement('th');
+                cell.scope = 'col';
+                cell.textContent = dayName;
+                header.append(cell);
+            }
+
+            let day = 1;
+            for (let rowNumber = 0; day <= daysInMonth; rowNumber += 1) {
+                const row = table.insertRow();
+                for (let column = 0; column < 7; column += 1) {
+                    const cell = row.insertCell();
+                    if ((rowNumber === 0 && column < firstDayOffset) || day > daysInMonth) continue;
+                    cell.textContent = String(day);
+                    cell.dataset.day = String(day);
+                    day += 1;
+                }
+            }
+            result.append(table);
+        }
+
+        renderCalendar();
+    </script>
+</body>
+</html>

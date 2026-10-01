@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задание 29 — Преобразование чисел</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 720px; margin: 40px auto; padding: 0 20px; color: #1d2939; }
+        .numbers { display: grid; grid-template-columns: repeat(4, minmax(80px, 1fr)); gap: 12px; margin: 20px 0; }
+        label { display: grid; gap: 5px; font-weight: bold; }
+        input, button { font: inherit; padding: 8px; }
+        button { cursor: pointer; background: #175cd3; color: white; border: 0; border-radius: 4px; }
+        #result { margin-top: 20px; padding: 14px; background: #eff8ff; border-left: 4px solid #175cd3; font-weight: bold; min-height: 1.4em; }
+        @media (max-width: 480px) { .numbers { grid-template-columns: repeat(2, 1fr); } }
+    </style>
+</head>
+<body>
+    <h1>Задание 29. Преобразование четырёх чисел</h1>
+    <p>Если <i>a ≤ b ≤ c ≤ d</i>, все числа заменяются максимальным; если <i>a &gt; b &gt; c &gt; d</i>, они остаются без изменений; иначе заменяются квадратами.</p>
+    <div class="numbers">
+        <label>a <input id="a" type="number" step="any" value="1"></label>
+        <label>b <input id="b" type="number" step="any" value="2"></label>
+        <label>c <input id="c" type="number" step="any" value="2"></label>
+        <label>d <input id="d" type="number" step="any" value="4"></label>
+    </div>
+    <button type="button" onclick="transformValues()">Преобразовать</button>
+    <p id="result" role="status"></p>
+
+    <script>
+        function formatValues(values) {
+            return values.map((value, index) => `${'abcd'[index]} = ${value}`).join('; ');
+        }
+
+        function transformValues() {
+            const fields = ['a', 'b', 'c', 'd'].map((id) => document.getElementById(id));
+            const values = fields.map((field) => Number(field.value));
+            const result = document.getElementById('result');
+            if (fields.some((field) => field.value.trim() === '') || values.some((value) => !Number.isFinite(value))) {
+                result.textContent = 'Введите четыре корректных числовых значения.';
+                return;
+            }
+
+            const [a, b, c, d] = values;
+            let transformed;
+            let explanation;
+            // Нестрогое сравнение в первой ветви соответствует условию a ≤ b ≤ c ≤ d.
+            if (a <= b && b <= c && c <= d) {
+                const maximum = Math.max(...values);
+                transformed = [maximum, maximum, maximum, maximum];
+                explanation = 'Последовательность не убывает: все значения заменены максимумом.';
+            } else if (a > b && b > c && c > d) {
+                transformed = values;
+                explanation = 'Последовательность строго убывает: значения сохранены.';
+            } else {
+                transformed = values.map((value) => value ** 2);
+                explanation = 'Условие не выполнено: значения заменены квадратами.';
+            }
+            result.textContent = `${explanation} Результат: ${formatValues(transformed)}.`;
+        }
+
+        transformValues();
+    </script>
+</body>
+</html>

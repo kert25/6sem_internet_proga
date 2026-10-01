@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задание 27 — Количество грибов</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 680px; margin: 40px auto; padding: 0 20px; color: #1d2939; }
+        label { display: inline-grid; gap: 5px; font-weight: bold; margin: 20px 12px 20px 0; }
+        input, button { font: inherit; padding: 8px; }
+        button { cursor: pointer; background: #175cd3; color: white; border: 0; border-radius: 4px; }
+        #phrase { padding: 15px; background: #ecfdf3; border-left: 4px solid #039855; font-size: 1.15rem; min-height: 1.4em; }
+    </style>
+</head>
+<body>
+    <h1>Задание 27. Согласование слова «гриб»</h1>
+    <p>Введите количество грибов — программа подберёт верную форму слова.</p>
+    <label>Количество K <input id="mushroom-count" type="number" min="0" step="1" value="21"></label>
+    <button type="button" onclick="showMushroomPhrase()">Составить фразу</button>
+    <p id="phrase" role="status"></p>
+
+    <script>
+        function mushroomEnding(count) {
+            const lastTwoDigits = count % 100;
+            if (lastTwoDigits >= 11 && lastTwoDigits <= 14) return 'грибов';
+            const lastDigit = count % 10;
+            if (lastDigit === 1) return 'гриб';
+            if (lastDigit >= 2 && lastDigit <= 4) return 'гриба';
+            return 'грибов';
+        }
+
+        function showMushroomPhrase() {
+            const countField = document.getElementById('mushroom-count');
+            const count = Number(countField.value);
+            const phrase = document.getElementById('phrase');
+            if (countField.value.trim() === '' || !Number.isInteger(count) || count < 0) {
+                phrase.textContent = 'Введите неотрицательное целое число.';
+                return;
+            }
+            // Отдельная проверка 11–14 в mushroomEnding нужна из-за исключения
+            // из общего правила выбора окончания по последней цифре.
+            phrase.textContent = `Мы нашли в лесу ${count} ${mushroomEnding(count)}.`;
+        }
+
+        showMushroomPhrase();
+    </script>
+</body>
+</html>
