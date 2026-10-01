@@ -1,0 +1,129 @@
+{
+  "version": 2,
+  "commit_on_completion": false,
+  "project_notes": [
+    "Методичка — первичный источник официального номера, темы, задания и требований; каталог ЛРN является только рабочим путём.",
+    "Вариант для индивидуальных заданий — номер 9 по списку группы.",
+    "Во всех работах код сопровождается комментариями.",
+    "ЛР4–ЛР6 используют общую предметную область «Видеотека».",
+    "Для ЛР7 используется встроенный сервер PHP (php -S); Denwer не нужен.",
+    "ЛР8 использует локальные библиотеки _libs/jquery-3.7.1.min.js и _libs/jquery-1.12.4.min.js.",
+    "Для ЛР8 при номере по списку 9 согласовано циклическое соответствие индивидуальных заданий: 1/1, 2/4, 3/2, 4/3."
+  ],
+  "labs": {
+    "1": {
+      "status": "ready_for_review",
+      "directory": "ЛР1",
+      "methodical_guide": "ЛР1/Лабораторная работа 9 _Основы JavaScript.pdf",
+      "report_number": 9,
+      "theme": "Основы JavaScript",
+      "variant": null,
+      "next_step": "Проверить ЛР1 и сообщить замечания либо подтвердить сдачу",
+      "commands": {},
+      "artifacts": [
+        "ЛР1/Отчет_ЛР1.docx",
+        "ЛР1/Отчет_ЛР1.pdf",
+        "ЛР1/text.docx",
+        "ЛР1/screenshots"
+      ],
+      "notes": [
+        "Все 20 заданий выполнены; сценарий демонстрации и вопросы для защиты находятся в ЛР1/text.docx.",
+        "Скриншоты результата находятся в ЛР1/screenshots/."
+      ]
+    },
+    "2": {
+      "status": "not_started",
+      "directory": "ЛР2",
+      "methodical_guide": "ЛР2/ЛР_10 Интернет_программирование_ JS Функция и обработка события.pdf",
+      "report_number": 10,
+      "theme": "Функция и обработка события на JavaScript",
+      "variant": "9",
+      "next_step": "Прочитать методичку и определить задания для варианта 9",
+      "commands": {},
+      "artifacts": [],
+      "notes": []
+    },
+    "3": {
+      "status": "not_started",
+      "directory": "ЛР3",
+      "methodical_guide": "ЛР3/ЛР_11 Интернет_программирование_ JS Организация ветвлений и работа с методами в JS.pdf",
+      "report_number": 11,
+      "theme": "Организация ветвлений и работа с методами в JavaScript",
+      "variant": "9",
+      "next_step": "Прочитать методичку и определить задания для варианта 9",
+      "commands": {},
+      "artifacts": [],
+      "notes": []
+    },
+    "4": {
+      "status": "not_started",
+      "directory": "ЛР4",
+      "methodical_guide": "ЛР4/ЛР_12 Интернет_программирование_XML документы.pdf",
+      "report_number": 12,
+      "theme": "XML документы",
+      "variant": "9",
+      "next_step": "Прочитать методичку и подготовить XML-документ предметной области «Видеотека»",
+      "commands": {},
+      "artifacts": [],
+      "notes": []
+    },
+    "5": {
+      "status": "not_started",
+      "directory": "ЛР5",
+      "methodical_guide": "ЛР5/ЛР_13 Интернет_программирование_XML DTD.pdf",
+      "report_number": 13,
+      "theme": "XML DTD",
+      "variant": "9",
+      "next_step": "Прочитать методичку и применить DTD к общей предметной области «Видеотека»",
+      "commands": {},
+      "artifacts": [],
+      "notes": []
+    },
+    "6": {
+      "status": "not_started",
+      "directory": "ЛР6",
+      "methodical_guide": "ЛР6/ЛР_14 Интернет_программирование_XML Schema.pdf",
+      "report_number": 14,
+      "theme": "XML Schema",
+      "variant": "9",
+      "next_step": "Прочитать методичку и применить XML Schema к общей предметной области «Видеотека»",
+      "commands": {},
+      "artifacts": [],
+      "notes": []
+    },
+    "7": {
+      "status": "not_started",
+      "directory": "ЛР7",
+      "methodical_guide": "ЛР7/ЛР_15 Интернет_программирование_Использование языка PHP.pdf",
+      "report_number": 15,
+      "theme": "Использование языка PHP",
+      "variant": "9",
+      "next_step": "Прочитать методичку и определить задания для варианта 9",
+      "commands": {
+        "server": "php -S 127.0.0.1:8080"
+      },
+      "artifacts": [],
+      "notes": [
+        "Использовать встроенный сервер PHP; Denwer не требуется."
+      ]
+    },
+    "8": {
+      "status": "not_started",
+      "directory": "ЛР8",
+      "methodical_guide": "ЛР8/ЛР_16 Интернет_программирование_Основы jQuery.pdf",
+      "report_number": 16,
+      "theme": "Основы jQuery",
+      "variant": "9",
+      "shared_resources": [
+        "_libs/jquery-3.7.1.min.js",
+        "_libs/jquery-1.12.4.min.js"
+      ],
+      "next_step": "Прочитать методичку и выполнить примеры 1–20 и согласованные индивидуальные задания",
+      "commands": {},
+      "artifacts": [],
+      "notes": [
+        "Индивидуальные задания для номера по списку 9: 1/1, 2/4, 3/2, 4/3."
+      ]
+    }
+  }
+}
