@@ -32,16 +32,36 @@
       ]
     },
     "2": {
-      "status": "not_started",
+      "status": "ready_for_review",
       "directory": "ЛР2",
       "methodical_guide": "ЛР2/ЛР_10 Интернет_программирование_ JS Функция и обработка события.pdf",
       "report_number": 10,
       "theme": "Функция и обработка события на JavaScript",
       "variant": "9",
-      "next_step": "Прочитать методичку и определить задания для варианта 9",
-      "commands": {},
-      "artifacts": [],
-      "notes": []
+      "next_step": "Проверить ЛР2 и сообщить замечания либо подтвердить сдачу",
+      "commands": {
+        "functional_check": "node _tools/cdp.js run --url file:///.../ЛР2/ExN.html --eval ... --shot ЛР2/screenshots/...",
+        "build_report": "py _tools/make_docx.py --out ЛР2/Отчет_ЛР2.docx --num 10 --theme <theme> --content ЛР2/content.json",
+        "verify_docx": "py _tools/inspect_docx.py ЛР2/Отчет_ЛР2.docx",
+        "verify_pdf": "py _tools/pdf_text.py ЛР2/Отчет_ЛР2.pdf"
+      },
+      "artifacts": [
+        "ЛР2/Ex9.html",
+        "ЛР2/Ex2.html",
+        "ЛР2/Ex12.html",
+        "ЛР2/Ex13.html",
+        "ЛР2/screenshots",
+        "ЛР2/content.json",
+        "ЛР2/content_text.json",
+        "ЛР2/Отчет_ЛР2.docx",
+        "ЛР2/Отчет_ЛР2.pdf",
+        "ЛР2/text.docx"
+      ],
+      "notes": [
+        "Вариант 9: выполнены индивидуальные задания 9, 2, 12 и 13.",
+        "Проверены сценарии: Hello, world! после alert; расчёт площади и валидация; нормализация анкеты и Reset; результаты теста 5/5 и 1/5.",
+        "DOCX проверен inspect_docx.py; отчёт преобразован Word COM в PDF и проверен pdf_text.py."
+      ]
     },
     "3": {
       "status": "not_started",

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задание 9 — Hello, world!</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 720px; margin: 48px auto; padding: 0 20px; }
+        #greeting { color: #1f5b34; font-size: 2rem; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Задание 9. Диалоговое окно</h1>
+    <p>После закрытия диалогового окна на странице появится приветствие.</p>
+    <p id="greeting" aria-live="polite"></p>
+
+    <script>
+        // alert блокирует выполнение функции до нажатия пользователем кнопки «ОК».
+        function showGreeting() {
+            alert('Нажмите «ОК», чтобы вывести приветствие.');
+            document.getElementById('greeting').textContent = 'Hello, world!';
+        }
+
+        window.addEventListener('DOMContentLoaded', showGreeting);
+    </script>
+</body>
+</html>

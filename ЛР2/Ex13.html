@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задание 13 — Тест JavaScript</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 760px; margin: 32px auto; padding: 0 20px; }
+        fieldset { margin: 16px 0; padding: 12px 16px; }
+        label { display: block; margin: 7px 0; }
+        button { padding: 8px 16px; cursor: pointer; }
+        #test-result { min-height: 1.5em; margin-top: 18px; font-size: 1.15rem; font-weight: bold; color: #1f5b34; }
+    </style>
+</head>
+<body>
+    <h1>Задание 13. Тест на знание JavaScript</h1>
+    <p>В каждом вопросе выберите один вариант. Первый вариант — правильный.</p>
+    <form id="quiz">
+        <fieldset><legend>1. Для чего используется функция JavaScript?</legend>
+            <label><input type="radio" name="q1" data-correct="true"> Для выполнения повторно используемых действий</label>
+            <label><input type="radio" name="q1"> Только для оформления страницы</label>
+            <label><input type="radio" name="q1"> Только для хранения изображений</label>
+        </fieldset>
+        <fieldset><legend>2. Какое событие происходит при щелчке кнопки мыши?</legend>
+            <label><input type="radio" name="q2" data-correct="true"> click</label>
+            <label><input type="radio" name="q2"> load</label>
+            <label><input type="radio" name="q2"> reset</label>
+        </fieldset>
+        <fieldset><legend>3. Как получить доступ к элементу с id=&quot;result&quot;?</legend>
+            <label><input type="radio" name="q3" data-correct="true"> document.getElementById('result')</label>
+            <label><input type="radio" name="q3"> window.getResult('result')</label>
+            <label><input type="radio" name="q3"> form.result()</label>
+        </fieldset>
+        <fieldset><legend>4. Какой метод показывает диалоговое сообщение?</legend>
+            <label><input type="radio" name="q4" data-correct="true"> alert()</label>
+            <label><input type="radio" name="q4"> confirmText()</label>
+            <label><input type="radio" name="q4"> showMessage()</label>
+        </fieldset>
+        <fieldset><legend>5. Какое свойство хранит текст из поля ввода?</legend>
+            <label><input type="radio" name="q5" data-correct="true"> value</label>
+            <label><input type="radio" name="q5"> length</label>
+            <label><input type="radio" name="q5"> title</label>
+        </fieldset>
+        <button type="submit">Проверить результат</button>
+    </form>
+    <p id="test-result" aria-live="polite"></p>
+
+    <script>
+        function evaluateTest() {
+            const correctAnswers = document.querySelectorAll('#quiz input[data-correct="true"]:checked').length;
+            document.getElementById('test-result').textContent = `Правильных ответов: ${correctAnswers} из 5`;
+        }
+
+        document.getElementById('quiz').addEventListener('submit', function (event) {
+            event.preventDefault();
+            evaluateTest();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задание 2 — Площадь треугольника</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 720px; margin: 32px auto; padding: 0 20px; }
+        label { display: block; margin: 12px 0; }
+        input { width: 9rem; padding: 6px; }
+        button { padding: 7px 14px; cursor: pointer; }
+        #result { min-height: 1.5em; font-weight: bold; margin: 18px 0; }
+        .error { color: #a61b1b; }
+        .success { color: #1f5b34; }
+        #triangle svg { border: 1px solid #777; background: #f8fbff; max-width: 100%; }
+    </style>
+</head>
+<body>
+    <h1>Задание 2. Площадь треугольника</h1>
+    <p>Введите основание и высоту треугольника, затем нажмите кнопку.</p>
+    <form id="triangle-form">
+        <label>Основание a: <input id="base" name="base" type="number" min="0.01" step="any" required></label>
+        <label>Высота h: <input id="height" name="height" type="number" min="0.01" step="any" required></label>
+        <button type="submit">Вычислить</button>
+    </form>
+    <p id="result" aria-live="polite"></p>
+    <div id="triangle" aria-label="Изображение треугольника"></div>
+
+    <script>
+        function calculateTriangle() {
+            const base = Number(document.getElementById('base').value);
+            const height = Number(document.getElementById('height').value);
+            const result = document.getElementById('result');
+            const drawing = document.getElementById('triangle');
+            drawing.replaceChildren();
+
+            // Площадь и рисунок имеют смысл только для конечных положительных размеров.
+            if (!Number.isFinite(base) || !Number.isFinite(height) || base <= 0 || height <= 0) {
+                result.textContent = 'Введите положительные числовые значения основания и высоты.';
+                result.className = 'error';
+                return;
+            }
+
+            const area = base * height / 2;
+            result.textContent = `Площадь треугольника S = ${area}`;
+            result.className = 'success';
+
+            // Единый коэффициент сохраняет соотношение введённых основания и высоты.
+            const scale = Math.min(360 / base, 240 / height);
+            const width = base * scale;
+            const svgHeight = height * scale;
+            const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+            svg.setAttribute('width', String(width + 40));
+            svg.setAttribute('height', String(svgHeight + 40));
+            svg.setAttribute('viewBox', `0 0 ${width + 40} ${svgHeight + 40}`);
+            const polygon = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+            polygon.setAttribute('points', `20,${svgHeight + 20} ${width + 20},${svgHeight + 20} 20,20`);
+            polygon.setAttribute('fill', '#a9d4ff');
+            polygon.setAttribute('stroke', '#1c5d99');
+            polygon.setAttribute('stroke-width', '2');
+            svg.append(polygon);
+            drawing.append(svg);
+        }
+
+        document.getElementById('triangle-form').addEventListener('submit', function (event) {
+            event.preventDefault();
+            calculateTriangle();
+        });
+    </script>
+</body>
+</html>

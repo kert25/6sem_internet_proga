@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задание 12 — Обработка анкеты</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 720px; margin: 32px auto; padding: 0 20px; }
+        label { display: block; margin: 12px 0; }
+        input { width: 18rem; max-width: 100%; padding: 6px; }
+        button { padding: 7px 14px; margin-right: 8px; cursor: pointer; }
+        #summary { min-height: 1.5em; margin-top: 18px; padding: 10px; background: #f2f7ff; white-space: pre-line; }
+    </style>
+</head>
+<body>
+    <h1>Задание 12. Анкета</h1>
+    <form id="questionnaire">
+        <label>Фамилия: <input id="surname" name="surname" type="text" required></label>
+        <label>Имя: <input id="first-name" name="firstName" type="text" required></label>
+        <label>Возраст: <input id="age" name="age" type="number" min="0" step="1"></label>
+        <label>Город: <input id="city" name="city" type="text"></label>
+        <button type="button" id="complete">Complete</button>
+        <button type="reset">Reset</button>
+    </form>
+    <div id="summary" aria-live="polite"></div>
+
+    <script>
+        function normalizeSurname() {
+            const surname = document.getElementById('surname');
+            surname.value = surname.value.toUpperCase();
+        }
+
+        function normalizeAge() {
+            const age = document.getElementById('age');
+            if (age.value !== '' && Number(age.value) < 18) {
+                age.value = '0';
+            }
+        }
+
+        function completeForm() {
+            normalizeSurname();
+            normalizeAge();
+            const form = document.getElementById('questionnaire');
+            const details = [
+                `Фамилия: ${form.elements.surname.value}`,
+                `Имя: ${form.elements.firstName.value}`,
+                `Возраст: ${form.elements.age.value}`,
+                `Город: ${form.elements.city.value}`
+            ].join('\n');
+            document.getElementById('summary').textContent = details;
+            alert(details);
+        }
+
+        function resetForm() {
+            // Событие reset приходит до фактического сброса полей формы.
+            window.setTimeout(function () {
+                document.getElementById('summary').textContent = '';
+            }, 0);
+        }
+
+        document.getElementById('surname').addEventListener('change', normalizeSurname);
+        document.getElementById('age').addEventListener('change', normalizeAge);
+        document.getElementById('complete').addEventListener('click', completeForm);
+        document.getElementById('questionnaire').addEventListener('reset', resetForm);
+    </script>
+</body>
+</html>
