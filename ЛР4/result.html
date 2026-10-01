@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>ЛР12 — проверка XML-документа</title>
+  <style>
+    body { margin: 0; background: #f3f6fa; color: #172033; font-family: Arial, sans-serif; }
+    main { max-width: 900px; margin: 48px auto; padding: 36px 44px; background: #fff; border-radius: 14px; box-shadow: 0 8px 30px #24334d22; }
+    h1 { margin-top: 0; color: #173f70; }
+    .success { padding: 18px; border-left: 6px solid #198754; background: #eaf7ef; color: #135c38; font-weight: bold; font-size: 20px; }
+    pre { padding: 22px; background: #172033; color: #e9f0ff; border-radius: 8px; font: 18px/1.55 Consolas, monospace; white-space: pre-wrap; }
+    table { width: 100%; border-collapse: collapse; margin-top: 24px; }
+    th, td { padding: 12px; border: 1px solid #cbd5e1; text-align: left; }
+    th { background: #e8eff8; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>ЛР №12. XML документы</h1>
+    <p>Результат запуска <code>java ValidateXml Videoteka.xml</code>:</p>
+    <div class="success">✓ XML-документ успешно проверен Java XML-парсером</div>
+    <pre>XML-документ корректно сформирован.
+Корневой элемент: videotheque
+Количество фильмов: 3</pre>
+    <table>
+      <thead><tr><th>Файл</th><th>Предметная область</th><th>Кодировка</th></tr></thead>
+      <tbody><tr><td>Videoteka.xml</td><td>Видеотека</td><td>UTF-8</td></tr></tbody>
+    </table>
+  </main>
+</body>
+</html>

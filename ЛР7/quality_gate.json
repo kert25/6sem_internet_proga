@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "lab": 7,
+  "report_number": 15,
+  "status": "passed",
+  "checked_at": "2026-10-01T17:44:02Z",
+  "checks": [
+    "content_references",
+    "artifacts",
+    "report_docx",
+    "report_pdf",
+    "text_docx"
+  ],
+  "files": [
+    "ЛР7/Отчет_ЛР7.docx",
+    "ЛР7/Отчет_ЛР7.pdf",
+    "ЛР7/text.docx"
+  ]
+}

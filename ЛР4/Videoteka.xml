@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Каталог видеотеки. Один фильм может иметь несколько актёров и экземпляров. -->
+<videotheque name="Видеотека ИПМКН" updated="2026-10-01">
+    <film id="f001" ageRating="12+">
+        <title>Интерстеллар</title>
+        <originalTitle>Interstellar</originalTitle>
+        <genre>Научная фантастика</genre>
+        <releaseYear>2014</releaseYear>
+        <duration minutes="169" />
+        <director>Кристофер Нолан</director>
+        <country>США, Великобритания</country>
+        <cast>
+            <actor role="Купер">Мэттью Макконахи</actor>
+            <actor role="Амелия Брэнд">Энн Хэтэуэй</actor>
+        </cast>
+        <description><![CDATA[Экспедиция отправляется через червоточину, чтобы найти новый дом для человечества.]]></description>
+        <copies>
+            <copy inventoryNumber="VD-001" format="Blu-ray" available="true" />
+            <copy inventoryNumber="VD-002" format="DVD" available="false" />
+        </copies>
+    </film>
+    <film id="f002" ageRating="16+">
+        <title>Матрица</title>
+        <originalTitle>The Matrix</originalTitle>
+        <genre>Фантастика</genre>
+        <releaseYear>1999</releaseYear>
+        <duration minutes="136" />
+        <director>Лана Вачовски, Лилли Вачовски</director>
+        <country>США</country>
+        <cast>
+            <actor role="Нео">Киану Ривз</actor>
+            <actor role="Тринити">Кэрри-Энн Мосс</actor>
+        </cast>
+        <description><![CDATA[Программист узнаёт, что привычный мир является компьютерной симуляцией.]]></description>
+        <copies>
+            <copy inventoryNumber="VD-003" format="Blu-ray" available="true" />
+        </copies>
+    </film>
+    <film id="f003" ageRating="6+">
+        <title>Король Лев</title>
+        <originalTitle>The Lion King</originalTitle>
+        <genre>Анимация</genre>
+        <releaseYear>1994</releaseYear>
+        <duration minutes="88" />
+        <director>Роджер Аллерс, Роб Минкофф</director>
+        <country>США</country>
+        <cast>
+            <actor role="Симба">Мэттью Бродерик</actor>
+            <actor role="Муфаса">Джеймс Эрл Джонс</actor>
+        </cast>
+        <description><![CDATA[История взросления львёнка Симбы и его возвращения в Земли Прайда.]]></description>
+        <copies>
+            <copy inventoryNumber="VD-004" format="DVD" available="true" />
+        </copies>
+    </film>
+</videotheque>

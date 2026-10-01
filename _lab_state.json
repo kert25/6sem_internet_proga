@@ -96,59 +96,148 @@
       ]
     },
     "4": {
-      "status": "not_started",
+      "status": "ready_for_review",
       "directory": "ЛР4",
       "methodical_guide": "ЛР4/ЛР_12 Интернет_программирование_XML документы.pdf",
       "report_number": 12,
       "theme": "XML документы",
       "variant": "9",
-      "next_step": "Прочитать методичку и подготовить XML-документ предметной области «Видеотека»",
-      "commands": {},
-      "artifacts": [],
-      "notes": []
+      "next_step": "Проверить ЛР4 и сообщить замечания либо подтвердить сдачу",
+      "commands": {
+        "compile_and_validate": "javac ValidateXml.java && java ValidateXml Videoteka.xml",
+        "build_report": "py _tools/make_docx.py --out ЛР4/Отчет_ЛР4.docx --num 12 --theme <theme> --content ЛР4/content.json",
+        "verify_docx": "py _tools/inspect_docx.py ЛР4/Отчет_ЛР4.docx",
+        "verify_pdf": "py _tools/pdf_text.py ЛР4/Отчет_ЛР4.pdf"
+      },
+      "artifacts": [
+        "ЛР4/Videoteka.xml",
+        "ЛР4/ValidateXml.java",
+        "ЛР4/ValidateXml.class",
+        "ЛР4/result.html",
+        "ЛР4/screenshots/validation.png",
+        "ЛР4/content.json",
+        "ЛР4/content_text.json",
+        "ЛР4/Отчет_ЛР4.docx",
+        "ЛР4/Отчет_ЛР4.pdf",
+        "ЛР4/text.docx"
+      ],
+      "notes": [
+        "Предметная область — «Видеотека»: три фильма, сведения об актёрах и экземплярах носителей.",
+        "Проверка через Java DocumentBuilder подтвердила корректное формирование XML: корневой элемент videotheque, 3 фильма.",
+        "DOCX и text.docx проверены inspect_docx.py; отчёт преобразован Word COM в PDF и проверен pdf_text.py."
+      ]
     },
     "5": {
-      "status": "not_started",
+      "status": "completed",
       "directory": "ЛР5",
       "methodical_guide": "ЛР5/ЛР_13 Интернет_программирование_XML DTD.pdf",
       "report_number": 13,
       "theme": "XML DTD",
       "variant": "9",
-      "next_step": "Прочитать методичку и применить DTD к общей предметной области «Видеотека»",
-      "commands": {},
-      "artifacts": [],
-      "notes": []
+      "next_step": "ЛР5 проверена пользователем и завершена",
+      "commands": {
+        "compile": "javac ValidateDtd.java",
+        "validate_success": "java ValidateDtd Videoteka.xml",
+        "validate_errors": "java ValidateDtd invalid/invalid-age-rating.xml; java ValidateDtd invalid/invalid-structure.xml; java ValidateDtd invalid/invalid-director-reference.xml",
+        "build_report": "py _tools/make_docx.py --out ЛР5/Отчет_ЛР5.docx --num 13 --theme XML DTD --content ЛР5/content.json",
+        "verify_docx": "py _tools/inspect_docx.py ЛР5/Отчет_ЛР5.docx",
+        "verify_pdf": "py _tools/pdf_text.py ЛР5/Отчет_ЛР5.pdf"
+      },
+      "artifacts": [
+        "ЛР5/Videoteka.dtd",
+        "ЛР5/Videoteka.xml",
+        "ЛР5/ValidateDtd.java",
+        "ЛР5/invalid",
+        "ЛР5/screenshots/validation-results.png",
+        "ЛР5/content.json",
+        "ЛР5/content_text.json",
+        "ЛР5/Отчет_ЛР5.docx",
+        "ЛР5/Отчет_ЛР5.pdf",
+        "ЛР5/text.docx"
+      ],
+      "notes": [
+        "Внешний Videoteka.dtd описывает структуру каталога, ID режиссёров и IDREF ссылку фильма на режиссёра.",
+        "Проверены успешная валидация и три отказа: недопустимый ageRating, отсутствие copies и ссылка на отсутствующий ID.",
+        "DOCX и text.docx проверены inspect_docx.py; отчёт преобразован Word COM в PDF и проверен pdf_text.py."
+      ]
     },
     "6": {
-      "status": "not_started",
+      "status": "ready_for_review",
       "directory": "ЛР6",
       "methodical_guide": "ЛР6/ЛР_14 Интернет_программирование_XML Schema.pdf",
       "report_number": 14,
       "theme": "XML Schema",
       "variant": "9",
-      "next_step": "Прочитать методичку и применить XML Schema к общей предметной области «Видеотека»",
-      "commands": {},
-      "artifacts": [],
-      "notes": []
+      "next_step": "Проверить ЛР6 и сообщить замечания либо подтвердить сдачу",
+      "commands": {
+        "compile": "javac ValidateXsd.java",
+        "validate_success": "java ValidateXsd Videoteka.xml Videoteka.xsd",
+        "validate_errors": "java ValidateXsd invalid/invalid-age-rating.xml Videoteka.xsd; java ValidateXsd invalid/invalid-duration.xml Videoteka.xsd; java ValidateXsd invalid/invalid-director-reference.xml Videoteka.xsd",
+        "build_report": "py _tools/make_docx.py --out ЛР6/Отчет_ЛР6.docx --num 14 --theme XML Schema --content ЛР6/content.json",
+        "verify_docx": "py _tools/inspect_docx.py ЛР6/Отчет_ЛР6.docx",
+        "verify_pdf": "py _tools/pdf_text.py ЛР6/Отчет_ЛР6.pdf"
+      },
+      "artifacts": [
+        "ЛР6/Videoteka.xsd",
+        "ЛР6/Videoteka.xml",
+        "ЛР6/ValidateXsd.java",
+        "ЛР6/invalid",
+        "ЛР6/screenshots/validation-results.png",
+        "ЛР6/content.json",
+        "ЛР6/content_text.json",
+        "ЛР6/Отчет_ЛР6.docx",
+        "ЛР6/Отчет_ЛР6.pdf",
+        "ЛР6/text.docx"
+      ],
+      "notes": [
+        "XSD описывает каталог «Видеотека»: режиссёры, фильмы, актёры и экземпляры носителей.",
+        "Проверены успешная валидация и три отказа: недопустимый ageRating, нулевая продолжительность и ссылка director на отсутствующий ID.",
+        "DOCX и text.docx проверены inspect_docx.py; отчёт преобразован Word COM в PDF и проверен pdf_text.py."
+      ]
     },
     "7": {
-      "status": "not_started",
+      "status": "completed",
       "directory": "ЛР7",
       "methodical_guide": "ЛР7/ЛР_15 Интернет_программирование_Использование языка PHP.pdf",
       "report_number": 15,
       "theme": "Использование языка PHP",
       "variant": "9",
-      "next_step": "Прочитать методичку и определить задания для варианта 9",
+      "next_step": "ЛР7 проверена пользователем и завершена",
       "commands": {
-        "server": "php -S 127.0.0.1:8080"
+        "server": "php -S 127.0.0.1:8080",
+        "syntax_check": "php -l ЛР7/index.php && php -l ЛР7/common.php && php -l ЛР7/ex51.php && php -l ЛР7/ex91.php && php -l ЛР7/ex41.php && php -l ЛР7/ex31.php && php -l ЛР7/ex21.php",
+        "build_report": "py _tools/make_docx.py --out ЛР7/Отчет_ЛР7.docx --num 15 --theme <theme> --content ЛР7/content.json"
       },
-      "artifacts": [],
+      "tooling": {
+        "report_inspector": "bundled:inspect_docx",
+        "pdf_text_extractor": "bundled:pdf_text"
+      },
+      "artifacts": [
+        "ЛР7/index.php",
+        "ЛР7/common.php",
+        "ЛР7/ex51.php",
+        "ЛР7/ex91.php",
+        "ЛР7/ex41.php",
+        "ЛР7/ex31.php",
+        "ЛР7/ex21.php",
+        "ЛР7/styles.css",
+        "ЛР7/screenshots",
+        "ЛР7/content.json",
+        "ЛР7/content_text.json",
+        "ЛР7/Отчет_ЛР7.docx",
+        "ЛР7/Отчет_ЛР7.pdf",
+        "ЛР7/text.docx",
+        "ЛР7/quality_gate.json"
+      ],
       "notes": [
-        "Использовать встроенный сервер PHP; Denwer не требуется."
+        "Использовать встроенный сервер PHP; Denwer не требуется.",
+        "Вариант 9: выполнены задания 5.1, 9.1, 4.1, 3.1 и 2.1.",
+        "Браузерные проверки подтвердили вывод первой программы, предупреждение email без @, сохранение ника в сессии, размер шрифта 42 px, четыре жанра массива и ветвь возраста 20 лет.",
+        "DOCX и text.docx проверены inspect_docx.py; отчёт преобразован Word COM в PDF и проверен pdf_text.py."
       ]
     },
     "8": {
-      "status": "not_started",
+      "status": "ready_for_review",
       "directory": "ЛР8",
       "methodical_guide": "ЛР8/ЛР_16 Интернет_программирование_Основы jQuery.pdf",
       "report_number": 16,
@@ -158,12 +247,43 @@
         "_libs/jquery-3.7.1.min.js",
         "_libs/jquery-1.12.4.min.js"
       ],
-      "next_step": "Прочитать методичку и выполнить примеры 1–20 и согласованные индивидуальные задания",
-      "commands": {},
-      "artifacts": [],
+      "next_step": "Review laboratory work 8 and report corrections or approve submission",
+      "commands": {
+        "functional_check": "node _tools/cdp.js run --url file:///.../ЛР8/index.html --eval ... --shot ЛР8/screenshots/...",
+        "build_report": "py _tools/make_docx.py --out ЛР8/Отчет_ЛР8.docx --num 16 --theme <theme> --content ЛР8/content.json",
+        "build_notes": "py _tools/make_docx.py --out ЛР8/text.docx --num 16 --theme <theme> --content ЛР8/content_text.json --no-title"
+      },
+      "artifacts": [
+        "ЛР8/index.html",
+        "ЛР8/experiments.html",
+        "ЛР8/experiments2.html",
+        "ЛР8/Individual_3.html",
+        "ЛР8/Individual_4.html",
+        "ЛР8/styles.css",
+        "ЛР8/screenshots",
+        "ЛР8/content.json",
+        "ЛР8/content_text.json",
+        "ЛР8/Отчет_ЛР8.docx",
+        "ЛР8/Отчет_ЛР8.pdf",
+        "ЛР8/text.docx",
+        "ЛР8/quality_gate.json"
+      ],
       "notes": [
         "Индивидуальные задания для номера по списку 9: 1/1, 2/4, 3/2, 4/3."
-      ]
+      ],
+      "verification": {
+        "status": "passed",
+        "checked_at": "2026-10-01T17:58:18.907347Z",
+        "checks": [
+          "functional_browser",
+          "report_references",
+          "report_docx",
+          "report_pdf",
+          "text_docx",
+          "quality_gate"
+        ],
+        "warnings": []
+      }
     }
   }
 }

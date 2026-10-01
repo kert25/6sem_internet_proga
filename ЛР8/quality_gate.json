@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "lab": 8,
+  "report_number": 16,
+  "status": "passed",
+  "checked_at": "2026-10-01T17:57:30Z",
+  "checks": [
+    "content_references",
+    "artifacts",
+    "report_docx",
+    "report_pdf",
+    "text_docx"
+  ],
+  "files": [
+    "ЛР8/Отчет_ЛР8.docx",
+    "ЛР8/Отчет_ЛР8.pdf",
+    "ЛР8/text.docx"
+  ]
+}

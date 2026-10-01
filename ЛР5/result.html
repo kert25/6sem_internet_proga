@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Результаты DTD-валидации</title>
+<style>
+body { margin: 0; padding: 32px; background: #f5f7fb; color: #182230; font: 17px/1.45 Consolas, monospace; }
+h1 { font: 700 26px/1.2 Arial, sans-serif; margin: 0 0 24px; }
+.case { margin: 16px 0; padding: 18px 20px; border-radius: 10px; background: #fff; box-shadow: 0 1px 4px #cbd5e1; }
+.ok { border-left: 7px solid #16803c; } .error { border-left: 7px solid #b42318; }
+.label { font: 700 18px Arial, sans-serif; margin-bottom: 8px; }
+.ok .label { color: #16803c; } .error .label { color: #b42318; }
+pre { margin: 0; white-space: pre-wrap; }
+</style>
+</head>
+<body>
+<h1>ЛР №13 — результаты DTD-валидации видеотеки</h1>
+<section class="case ok"><div class="label">Корректный XML: Videoteka.xml</div><pre>DTD-валидация успешно пройдена.
+Корневой элемент: videotheque
+Количество фильмов: 3</pre></section>
+<section class="case error"><div class="label">Недопустимое значение: invalid-age-rating.xml</div><pre>Ошибка DTD (строка 6): Attribute "ageRating" with value "18+"
+must have a value from the list "G PG PG13 R".</pre></section>
+<section class="case error"><div class="label">Нарушена структура: invalid-structure.xml</div><pre>Ошибка DTD (строка 14): The content of element type "film" is incomplete.
+Обязателен элемент copies.</pre></section>
+<section class="case error"><div class="label">Неверная ссылка: invalid-director-reference.xml</div><pre>Ошибка DTD (строка 17): An element with the identifier
+"dirMissing" must appear in the document.</pre></section>
+</body>
+</html>

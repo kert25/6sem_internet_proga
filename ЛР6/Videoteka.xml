@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Каталог видеотеки: фильмы, режиссёры и экземпляры носителей. -->
+<videotheque xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:noNamespaceSchemaLocation="Videoteka.xsd"
+             name="Видеотека ИПМКН" updated="2026-10-01">
+    <directors>
+        <director id="dirNolan" name="Кристофер Нолан" />
+        <director id="dirWachowski" name="Лана и Лилли Вачовски" />
+        <director id="dirAllersMinkoff" name="Роджер Аллерс и Роб Минкофф" />
+    </directors>
+    <films>
+        <film id="filmInterstellar" ageRating="PG13" director="dirNolan">
+            <title>Интерстеллар</title>
+            <originalTitle>Interstellar</originalTitle>
+            <genre>Научная фантастика</genre>
+            <releaseYear>2014</releaseYear>
+            <duration minutes="169" />
+            <country>США, Великобритания</country>
+            <cast>
+                <actor role="Купер">Мэттью Макконахи</actor>
+                <actor role="Амелия Брэнд">Энн Хэтэуэй</actor>
+            </cast>
+            <description>Экспедиция отправляется через червоточину, чтобы найти новый дом для человечества.</description>
+            <copies>
+                <copy inventoryNumber="copyInterstellarBluRay" format="BluRay" available="true" />
+                <copy inventoryNumber="copyInterstellarDvd" format="DVD" available="false" />
+            </copies>
+        </film>
+        <film id="filmMatrix" ageRating="R" director="dirWachowski">
+            <title>Матрица</title>
+            <originalTitle>The Matrix</originalTitle>
+            <genre>Фантастика</genre>
+            <releaseYear>1999</releaseYear>
+            <duration minutes="136" />
+            <country>США</country>
+            <cast>
+                <actor role="Нео">Киану Ривз</actor>
+                <actor role="Тринити">Кэрри-Энн Мосс</actor>
+            </cast>
+            <description>Программист узнаёт, что привычный мир является компьютерной симуляцией.</description>
+            <copies>
+                <copy inventoryNumber="copyMatrixBluRay" format="BluRay" available="true" />
+            </copies>
+        </film>
+        <film id="filmLionKing" ageRating="G" director="dirAllersMinkoff">
+            <title>Король Лев</title>
+            <originalTitle>The Lion King</originalTitle>
+            <genre>Анимация</genre>
+            <releaseYear>1994</releaseYear>
+            <duration minutes="88" />
+            <country>США</country>
+            <cast>
+                <actor role="Симба">Мэттью Бродерик</actor>
+                <actor role="Муфаса">Джеймс Эрл Джонс</actor>
+            </cast>
+            <description>История взросления львёнка Симбы и его возвращения в Земли Прайда.</description>
+            <copies>
+                <copy inventoryNumber="copyLionKingDvd" format="DVD" available="true" />
+            </copies>
+        </film>
+    </films>
+</videotheque>

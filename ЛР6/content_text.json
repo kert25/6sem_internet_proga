@@ -1,0 +1,21 @@
+[
+  {"h": "ЛР №14. Конспект для защиты"},
+  {"h": "Что выполнено"},
+  {"p": "Для предметной области «Видеотека» создана XML Schema Videoteka.xsd и XML-документ Videoteka.xml, связанный со схемой через xsi:noNamespaceSchemaLocation. Реализована программа ValidateXsd.java для проверки соответствия XML схеме XSD. Подготовлены три невалидных XML-файла, демонстрирующие работу ограничений схемы."},
+  {"h": "Как устроено решение"},
+  {"p": "XSD описывает структуру XML точнее DTD: доступны встроенные типы данных, ограничения значений, собственные именованные типы, последовательности элементов и пространства имён. В схеме videotheque содержит directors и films. Каждый фильм хранит обязательные сведения, актёров и не менее одного экземпляра носителя."},
+  {"p": "ageRatingType и mediaFormatType — именованные simpleType с xs:enumeration. updated имеет тип xs:date, releaseYear — xs:gYear, available — xs:boolean, minutes — xs:positiveInteger с верхней границей 600. Атрибуты id имеют тип xs:ID, а film@director — xs:IDREF, поэтому валидатор контролирует ссылочную целостность."},
+  {"p": "ValidateXsd.java получает XML и XSD в аргументах, создаёт SchemaFactory для XMLConstants.W3C_XML_SCHEMA_NS_URI, затем Schema и Validator. Обработчик SAXParseException выводит строку, столбец и описание нарушения. Доступ к внешним DTD и схемам отключён настройками безопасности."},
+  {"h": "Порядок демонстрации"},
+  {"p": "1. Открыть ЛР6/Videoteka.xsd и показать xs:schema, типы ageRatingType/mediaFormatType, xs:sequence, xs:ID и xs:IDREF."},
+  {"p": "2. Открыть ЛР6/Videoteka.xml и показать связь со схемой в xsi:noNamespaceSchemaLocation, справочник режиссёров и фильмы."},
+  {"p": "3. В терминале из ЛР6 выполнить javac ValidateXsd.java, затем java ValidateXsd Videoteka.xml Videoteka.xsd. Показать успешную проверку."},
+  {"p": "4. Выполнить java ValidateXsd invalid/invalid-age-rating.xml Videoteka.xsd, java ValidateXsd invalid/invalid-duration.xml Videoteka.xsd и java ValidateXsd invalid/invalid-director-reference.xml Videoteka.xsd. Показать нарушения enumeration, minInclusive и ID/IDREF."},
+  {"h": "Возможные вопросы и ответы"},
+  {"p": "Вопрос: Что такое XSD? Ответ: XML Schema Definition — язык W3C для формального описания структуры и допустимых данных XML-документа."},
+  {"p": "Вопрос: Чем XSD отличается от DTD? Ответ: XSD записывается в XML-синтаксис, поддерживает пространства имён, встроенные типы данных и ограничения значений; DTD этих возможностей в таком объёме не имеет."},
+  {"p": "Вопрос: Что задаёт xs:sequence? Ответ: обязательный порядок дочерних элементов; в работе сведения о фильме должны следовать в установленной схеме последовательности."},
+  {"p": "Вопрос: Для чего нужны xs:ID и xs:IDREF? Ответ: xs:ID задаёт уникальный идентификатор, а xs:IDREF требует ссылку на существующий идентификатор. Здесь film@director ссылается на director@id."},
+  {"p": "Вопрос: Что такое xs:enumeration? Ответ: это ограничение simpleType набором явно перечисленных допустимых значений, например G, PG, PG13 и R для возрастного рейтинга."},
+  {"p": "Вопрос: Как выполняется валидация? Ответ: SchemaFactory загружает XSD-схему, Validator сопоставляет с ней XML-документ и при несоответствии генерирует SAXParseException с местом ошибки."}
+]

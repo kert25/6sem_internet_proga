@@ -57,7 +57,7 @@ def title_page(num, theme):
     p.append(para(run("МИНОБРНАУКИ РОССИИ"), jc="center"))                      # P00
     p.append(para(run("Федеральное государственное бюджетное "), jc="center"))  # P01
     p.append(para([run("образовательное учреждение высшего образования"),        # P02
-                   run("«Тульский государственный университет»", br_type="")], jc="center"))
+                   run("«Тульский государственный университет»", br_type="textWrapping")], jc="center"))
     p.append(para(run("Институт прикладной математики и компьютерных наук"), jc="center"))  # P03
     p.append(para(run(""), jc="center"))   # P04
     p.append(para(run("")))                # P05

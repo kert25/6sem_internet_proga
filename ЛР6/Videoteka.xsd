@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- XML Schema каталога видеотеки. -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:simpleType name="ageRatingType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="G"/>
+            <xs:enumeration value="PG"/>
+            <xs:enumeration value="PG13"/>
+            <xs:enumeration value="R"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="mediaFormatType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="BluRay"/>
+            <xs:enumeration value="DVD"/>
+            <xs:enumeration value="Digital"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:element name="videotheque">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="directors">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="director" maxOccurs="unbounded">
+                                <xs:complexType>
+                                    <xs:attribute name="id" type="xs:ID" use="required"/>
+                                    <xs:attribute name="name" type="xs:string" use="required"/>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="films">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="film" maxOccurs="unbounded">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="title" type="xs:string"/>
+                                        <xs:element name="originalTitle" type="xs:string" minOccurs="0"/>
+                                        <xs:element name="genre" type="xs:string"/>
+                                        <xs:element name="releaseYear" type="xs:gYear"/>
+                                        <xs:element name="duration">
+                                            <xs:complexType>
+                                                <xs:attribute name="minutes" use="required">
+                                                    <xs:simpleType>
+                                                        <xs:restriction base="xs:positiveInteger">
+                                                            <xs:maxInclusive value="600"/>
+                                                        </xs:restriction>
+                                                    </xs:simpleType>
+                                                </xs:attribute>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element name="country" type="xs:string"/>
+                                        <xs:element name="cast">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="actor" maxOccurs="unbounded">
+                                                        <xs:complexType mixed="true">
+                                                            <xs:attribute name="role" type="xs:string" use="required"/>
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element name="description" type="xs:string"/>
+                                        <xs:element name="copies">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="copy" maxOccurs="unbounded">
+                                                        <xs:complexType>
+                                                            <xs:attribute name="inventoryNumber" type="xs:ID" use="required"/>
+                                                            <xs:attribute name="format" type="mediaFormatType" use="required"/>
+                                                            <xs:attribute name="available" type="xs:boolean" use="required"/>
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                    <xs:attribute name="id" type="xs:ID" use="required"/>
+                                    <xs:attribute name="ageRating" type="ageRatingType" use="required"/>
+                                    <xs:attribute name="director" type="xs:IDREF" use="required"/>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute name="name" type="xs:string" use="required"/>
+            <xs:attribute name="updated" type="xs:date" use="required"/>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

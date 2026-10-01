@@ -1,0 +1,40 @@
+<!-- Внешнее DTD-описание каталога видеотеки. -->
+<!ELEMENT videotheque (directors, films)>
+<!ATTLIST videotheque
+    name    CDATA #REQUIRED
+    updated CDATA #REQUIRED>
+
+<!ELEMENT directors (director+)>
+<!ELEMENT director EMPTY>
+<!ATTLIST director
+    id   ID    #REQUIRED
+    name CDATA #REQUIRED>
+
+<!ELEMENT films (film+)>
+<!ELEMENT film (title, originalTitle?, genre, releaseYear, duration, country, cast, description, copies)>
+<!ATTLIST film
+    id        ID                                #REQUIRED
+    ageRating (G|PG|PG13|R)                    #REQUIRED
+    director  IDREF                             #REQUIRED>
+
+<!ELEMENT title (#PCDATA)>
+<!ELEMENT originalTitle (#PCDATA)>
+<!ELEMENT genre (#PCDATA)>
+<!ELEMENT releaseYear (#PCDATA)>
+<!ELEMENT duration EMPTY>
+<!ATTLIST duration
+    minutes CDATA #REQUIRED>
+<!ELEMENT country (#PCDATA)>
+
+<!ELEMENT cast (actor+)>
+<!ELEMENT actor (#PCDATA)>
+<!ATTLIST actor
+    role CDATA #REQUIRED>
+
+<!ELEMENT description (#PCDATA)>
+<!ELEMENT copies (copy+)>
+<!ELEMENT copy EMPTY>
+<!ATTLIST copy
+    inventoryNumber ID                     #REQUIRED
+    format          (BluRay|DVD|Digital)  #REQUIRED
+    available       (true|false)          #REQUIRED>

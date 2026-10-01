@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE videotheque SYSTEM "../Videoteka.dtd">
+<videotheque name="Тестовая видеотека" updated="2026-10-01">
+    <directors><director id="dirTest" name="Тестовый режиссёр" /></directors>
+    <films>
+        <film id="filmTest" ageRating="PG" director="dirTest">
+            <title>Тестовый фильм</title>
+            <genre>Драма</genre>
+            <releaseYear>2026</releaseYear>
+            <duration minutes="100" />
+            <country>Россия</country>
+            <cast><actor role="Герой">Тестовый актёр</actor></cast>
+            <description>В документе отсутствует обязательный элемент copies.</description>
+        </film>
+    </films>
+</videotheque>
