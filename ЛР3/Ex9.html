@@ -50,8 +50,10 @@
             }
 
             // setFullYear предотвращает автоматическое преобразование годов 1–99 в 1901–1999.
-            const lastDay = new Date(0, month, 0);
+            // Год задаётся до перехода на день 0, иначе високосный февраль мог бы остаться 28-дневным.
+            const lastDay = new Date(0, month, 1);
             lastDay.setFullYear(year);
+            lastDay.setDate(0);
             const firstDay = new Date(0, month - 1, 1);
             firstDay.setFullYear(year);
             const daysInMonth = lastDay.getDate();
